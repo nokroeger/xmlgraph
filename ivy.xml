@@ -1,0 +1,8 @@
+<ivy-module version="2.0">
+	<info organisation="de.nokroeger.uni.xml" module="xmltree"/>
+	
+	<dependencies>
+		<dependency org="commons-cli" name="commons-cli" rev="1.2"/>
+		<dependency org="org.kohsuke" name="graphviz-api" rev="1.1"/>
+	</dependencies>
+</ivy-module>
