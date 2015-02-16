@@ -13,9 +13,9 @@
   
   <xsl:template match="*">
   	
-  	<xsl:text><xsl:value-of select="concat(local-name(.), '[shape=box];&#13;&#10;')"/></xsl:text>
+  	<xsl:text><xsl:value-of select="concat(generate-id(.), '[label=&quot;', local-name(.), '&quot; shape=box];&#13;&#10;')"/></xsl:text>
   	<xsl:if test="string(local-name(..)) != ''">
-  		<xsl:text><xsl:value-of select="concat(local-name(..), ' -- ', local-name(.), ';&#13;&#10;')"/></xsl:text>
+  		<xsl:text><xsl:value-of select="concat(generate-id(..), ' -- ', generate-id(.), ';&#13;&#10;')"/></xsl:text>
   	</xsl:if>
   	
   	<xsl:apply-templates select="@*|*|text()"/>
@@ -24,14 +24,15 @@
   
   <xsl:template match="text()">
   	<xsl:if test="string(.) != ''">
-  		<xsl:text><xsl:value-of select="concat(., '[shape=box, style=dotted];&#13;&#10;')"/></xsl:text>
-  		<xsl:text><xsl:value-of select="concat(local-name(..), ' -- ', ., ';&#13;&#10;')"/></xsl:text>
+  		<xsl:text><xsl:value-of select="concat(generate-id(.), '[label=&quot;', ., '&quot; shape=box, style=dotted];&#13;&#10;')"/></xsl:text>
+  		<xsl:text><xsl:value-of select="concat(generate-id(..), ' -- ', generate-id(.), ';&#13;&#10;')"/></xsl:text>
   	</xsl:if>
   </xsl:template>
   
   <xsl:template match="@*">
-  	<xsl:text><xsl:value-of select="concat(., '[shape=box, style=dotted]', ';&#13;&#10;')"/></xsl:text>
-  	<xsl:text><xsl:value-of select="concat(local-name(..), ' -- ', local-name(.), ' -- ', ., ';&#13;&#10;')"/></xsl:text>
+  	<xsl:text><xsl:value-of select="concat(generate-id(.), '[label=&quot;', local-name(.), '&quot;]&#13;&#10;')"/></xsl:text>
+  	<xsl:text><xsl:value-of select="concat('T', generate-id(.), '[label=&quot;', ., '&quot; shape=box, style=dotted];&#13;&#10;')"/></xsl:text>
+  	<xsl:text><xsl:value-of select="concat(generate-id(..), ' -- ', generate-id(.), ' -- ', 'T', generate-id(.), ';&#13;&#10;')"/></xsl:text>
   </xsl:template>
   
 </xsl:stylesheet>

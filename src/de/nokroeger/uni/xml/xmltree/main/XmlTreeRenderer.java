@@ -100,7 +100,7 @@ public class XmlTreeRenderer {
 	}
 	
 	private static String getOutputFormat(){
-		return cmd.getOptionValue("output", "png");
+		return cmd.getOptionValue("format", "png");
 	}
 	
 	private static String getLayoutAlgorithm(){
@@ -108,7 +108,7 @@ public class XmlTreeRenderer {
 	}
 	
 	private static File getOutputFile() throws MissingArgumentException, IOException{
-		File outputFile = new File(cmd.getOptionValue("output", getInputFile().getParent()+"/"+getInputFile().getName().substring(0, getInputFile().getName().lastIndexOf("."))+"."+getOutputFormat()));
+		File outputFile = new File(cmd.getOptionValue("output", getInputFile().getAbsoluteFile().getParent()+"/"+getInputFile().getName().substring(0, getInputFile().getName().lastIndexOf("."))+"."+getOutputFormat()));
 		if (outputFile.canWrite() || (!outputFile.exists() && outputFile.getParentFile().isDirectory() && outputFile.getParentFile().canWrite())){
 			return outputFile;
 		}
